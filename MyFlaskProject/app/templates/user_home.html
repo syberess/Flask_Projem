@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block body_content %}
+<section id="user-home" class="wrapper">
+    <div class="inner">
+        <h1>Merhaba, {{ username }}</h1>
+        <h2>Lütfen bir seçenek seçin:</h2>
+
+        <div class="actions">
+            <a href="{{ url_for('history') }}" class="button large">Geçmiş Harcamalarınızı Görüntüleyin</a>
+            <a href="{{ url_for('customer_spending', customer_id=session['customer_id']) }}" class="button large">Grafiklerinizi Görüntüleyin</a>
+            <a href="{{ url_for('submit') }}"  class="button large">Yeni Harcama Ekleyin</a>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    .actions {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}

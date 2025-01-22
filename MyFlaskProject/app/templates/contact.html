@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block body_content %}
+<section id="one" class="wrapper">
+    <div class="inner">
+        <h3>İletişim Formu</h3>
+
+        <form method="post" action="{{ url_for('contacts.Contact') }}">
+            <div class="row uniform">
+                <!-- İsim Alanı -->
+                <div class="6u 12u$(xsmall)">
+                    <input type="text" name="name" id="name" value="" placeholder="İsim" required>
+                </div>
+
+                <!-- Email Alanı -->
+                <div class="6u$ 12u$(xsmall)">
+                    <input type="email" name="email" id="email" value="" placeholder="Email"
+                           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$" title="Geçerli bir e-posta adresi giriniz." required>
+                </div>
+
+                <!-- Kategori Alanı -->
+                <div class="12u$">
+                    <div class="select-wrapper">
+                        <select name="category" id="category" required>
+                            <option value="" disabled selected>- Destek Kategorisi -</option>
+                            <option value="HESAP SORUNLARI">Hesap Sorunları</option>
+                            <option value="FİNANSAL RAPORLAR">Finansal Raporlar</option>
+                            <option value="ANOMALİ BİLDİRİMİ">Anomali Bildirimi</option>
+                            <option value="DİĞER">Diğer</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Öncelik Seçimi -->
+                <div class="4u 12u$(small)">
+                    <input type="radio" id="priority-low" name="priority" value="DÜŞÜK" checked>
+                    <label for="priority-low">Düşük Öncelik</label>
+                </div>
+                <div class="4u 12u$(small)">
+                    <input type="radio" id="priority-normal" name="priority" value="ORTA">
+                    <label for="priority-normal">Normal Öncelik</label>
+                </div>
+                <div class="4u$ 12u$(small)">
+                    <input type="radio" id="priority-high" name="priority" value="YÜKSEK">
+                    <label for="priority-high">Yüksek Öncelik</label>
+                </div>
+
+                <!-- Mesaj Alanı -->
+                <div class="12u$">
+                    <textarea name="message" id="message" placeholder="Mesajınızı Giriniz..." rows="6" required></textarea>
+                </div>
+
+                <!-- Gönder ve Sıfırla Butonları -->
+                <div class="12u$">
+                    <ul class="actions">
+                        <li><input type="submit" value="Gönder"></li>
+                        <li><input type="reset" value="Sıfırla" class="alt"></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+
+        <hr>
+
+        <!-- Başarı Mesajı Alanı -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flash-messages">
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+</section>
+{% endblock %}

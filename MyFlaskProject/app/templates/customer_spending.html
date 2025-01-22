@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block body_content %}
+
+<!-- Banner -->
+<section id="banner">
+    <div class="content">
+        <h1>Müşteri Harcama Analizi</h1>
+        <h2>Müşterilerin harcama alışkanlıklarını inceleyin, grafiklerle analiz edin ve alışılmadık harcamaları tespit edin.</h2>
+        <ul class="actions">
+            <li><a href="#dashboard" class="button scrolly">Grafiklerinizi Görüntüleyin</a></li>
+        </ul>
+    </div>
+</section>
+
+<!-- Kullanıcı Grafikleri -->
+<section id="dashboard" class="wrapper">
+    <div class="inner">
+        <h1>Merhaba, {{ username }}</h1>
+        <h2>Grafikleriniz</h2>
+
+        <!-- Kategoriye Göre Harcama -->
+        <div>
+            <h3>Kategoriye Göre Harcama</h3>
+            <img src="data:image/png;base64,{{ graphs['category_pie'] }}" alt="Kategoriye Göre Harcama">
+        </div>
+
+        <!-- Ülkeye Göre Harcama -->
+        <div>
+            <h3>Ülkeye Göre Harcama</h3>
+            <img src="data:image/png;base64,{{ graphs['country_bar'] }}" alt="Ülkeye Göre Harcama">
+        </div>
+
+        <!-- Ödeme Yöntemine Göre Harcama -->
+        <div>
+            <h3>Ödeme Yöntemine Göre Harcama</h3>
+            <img src="data:image/png;base64,{{ graphs['payment_pie'] }}" alt="Ödeme Yöntemine Göre Harcama">
+        </div>
+
+        <!-- En Yüksek ve En Düşük Harcama Kategorileri -->
+        <div>
+            <h3>En Yüksek ve En Düşük Harcama Kategorileri</h3>
+            <img src="data:image/png;base64,{{ graphs['category_bar'] }}" alt="En Yüksek ve En Düşük Harcama Kategorileri">
+        </div>
+
+        <!-- Günlük Harcama Trendi -->
+        <div>
+            <h3>Günlük Harcama Trendi</h3>
+            <img src="data:image/png;base64,{{ graphs['daily_trend'] }}" alt="Günlük Harcama Trendi">
+        </div>
+
+        <!-- Anomali Tespiti Grafiği -->
+        <div>
+            <h3>Anomali Tespiti</h3>
+            <img src="data:image/png;base64,{{ graphs['anomaly_detection'] }}" alt="Anomali Tespiti">
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

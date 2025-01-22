@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block body_content %}
+<section id="one" class="wrapper">
+    <div class="inner">
+        <h3>Kayıt Ol</h3>
+        <form method="post" action="{{ url_for('users.Register') }}">
+            <div class="row uniform">
+                <!-- Kullanıcı adı inputu -->
+                <div class="6u 12u$(xsmall)">
+                    <input type="text" name="username" id="username" placeholder="Kullanıcı Adı" required>
+                </div>
+
+                <!-- Şifre inputu -->
+                <div class="6u$ 12u$(xsmall)">
+                    <input type="password" name="password" id="password" placeholder="Şifre" required>
+                </div>
+
+                <!-- Customer ID inputu (Benzersiz müşteri ID'si) -->
+                <div class="6u$ 12u$(xsmall)">
+                    <input type="text" name="customer_id" id="customer_id" placeholder="Müşteri Numarası" required>
+                </div>
+
+                <!-- Email inputu -->
+                <div class="6u$ 12u$(xsmall)">
+                    <input type="email" name="email" id="email" placeholder="E-posta" required>
+                </div>
+
+                <div class="12u$">
+                    <ul class="actions">
+                        <li><input type="submit" value="Kayıt Ol"></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

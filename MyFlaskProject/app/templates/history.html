@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block body_content %}
+<section id="history" class="wrapper">
+    <div class="inner">
+        <h1>Merhaba, {{ username }}</h1>
+        <h2>Geçmiş Harcamalarınız</h2>
+
+        <!-- Filtreleme Formu -->
+        <form method="GET" action="{{ url_for('history') }}" class="filter-form">
+            <label for="start_date">Başlangıç Tarihi:</label>
+            <input type="date" name="start_date" id="start_date" value="{{ request.args.get('start_date', '') }}">
+
+            <label for="end_date">Bitiş Tarihi:</label>
+            <input type="date" name="end_date" id="end_date" value="{{ request.args.get('end_date', '') }}">
+
+            <label for="product_name">Kategori Adı:</label>
+            <input type="text" name="product_name" id="product_name" placeholder="Ürün/Kategori" value="{{ request.args.get('product_name', '') }}">
+
+            <button type="submit" class="btn-filter">Filtrele</button>
+        </form>
+
+        <!-- Harcama Tablosu -->
+        <div class="table-container">
+            <table id="history-table" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Tarih</th>
+                        <th>Mağaza Adı</th>
+                        <th>Fiyat</th>
+                        <th>Kategori</th>
+                        <th>Ödeme Yöntemi</th>
+                        <th>Konum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in history %}
+                    <tr>
+                        <td>{{ record.transaction_date.strftime('%d/%m/%Y') }}</td>
+                        <td>{{ record.store_name }}</td>
+                        <td>{{ record.amount }}</td>
+                        <td>{{ record.category }}</td>
+                        <td>{{ record.payment_method }}</td>
+                        <td>{{ record.location }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+
+{% endblock %}
+
+{% block scripts %}
+<!-- DataTables Initialization -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#history-table').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "language": {
+                "url": "https://cdn.datatables.net/plug-ins/1.13.1/i18n/Turkish.json"
+            }
+        });
+    });
+</script>
+{% endblock %}
